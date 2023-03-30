@@ -1,0 +1,81 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xsvcbindings.tap.upbound.io
+spec:
+  compositeTypeRef:
+    apiVersion: tap.upbound.io/v1alpha1
+    kind: XSvcBinding
+  #publishConnectionDetailsWithStoreConfigRef:
+   # name: default
+  resources:
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+              kind: ClusterInstanceClass
+              spec:
+                description:
+                  short: "Generic cluster instance class description"
+          providerConfigRef:
+            name: kubernetes-provider
+      name: cluster-instance-class
+      patches:
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.metadata.name
+        #- fromFieldPath: spec.instanceClassDescription
+        #  toFieldPath: spec.forProvider.manifest.spec.description
+        - fromFieldPath: spec.xrd
+          toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: rbac.authorization.k8s.io/v1
+              kind: ClusterRole
+              metadata:
+                labels:
+                  apps.tanzu.vmware.com/aggregate-to-app-operator-cluster-access: "true"
+                  #services.tanzu.vmware.com/aggregate-to-provider-kubernetes: "true"
+                  #services.tanzu.vmware.com/aggregate-to-provider-aws: "true"
+              rules:
+                - apiGroups:
+                  - "services.apps.tanzu.vmware.com"
+                  resources:
+                  - clusterinstanceclasses
+                  verbs:
+                  - claim
+                  resourceNames: []
+          providerConfigRef:
+            name: kubernetes-provider
+      name: classInstanceRole
+      patches:
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.metadata.name
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.rules[0].resourceNames[0]
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+              kind: ClassClaim
+          providerConfigRef:
+            name: kubernetes-provider
+      name: resource-demo
+      patches:
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.metadata.name
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.spec.classRef.name
+        - fromFieldPath: spec.claimParams
+          toFieldPath: spec.forProvider.manifest.spec.parameters
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.manifest.metadata.namespace

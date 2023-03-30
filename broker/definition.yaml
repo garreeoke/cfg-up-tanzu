@@ -1,0 +1,54 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xawsbrokermqs.tap.upbound.io
+spec:
+  group: tap.upbound.io
+  names:
+    kind: XAwsBrokerMq
+    plural: xawsbrokermqs
+  claimNames:
+    kind: AwsBrokerMq
+    plural: awsbrokermqs
+  connectionSecretKeys:
+    - type
+    - addresses
+    - virtual-host
+    - username
+    - password
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: Create a amazon mq broker and tanzu objects
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: "id/name"
+                part-of:
+                  type: string
+                  description: Name of application this is part of
+                region:
+                  type: string
+                  description: region
+                engineVersion:
+                  type: string
+                  description: broker version
+              required:
+                - id
+                - region
+                - engineVersion
+            status:
+              description: A Status represents the observed state
+              properties:
+                broker:
+                  description: Freeform field to delay creation of publisher pod
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+              type: object

@@ -1,0 +1,50 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xsvcbindings.tap.upbound.io
+  #labels:
+  #  tanzu-clusterInstanceClass: brokeMQ
+spec:
+  group: tap.upbound.io
+  names:
+    kind: XSvcBinding
+    plural: xsvcbindings
+  claimNames:
+    kind: SvcBinding
+    plural: svcbindings
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: Create a tanzu service binding and all object that are needed
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: the xrd to use
+                xrd:
+                  type: string
+                  description: the xrd to use
+                instanceClassDescription:
+                  type: string
+                  description: the description for the instance class
+                claimParams:
+                  description: Freeform field containing properties to pass to the class demo
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+              required:
+                - id
+                - xrd
+                - claimParams
+            status:
+              type: object
+              description: Status
+              properties:
+                secretNamespace:
+                  description: Where to store secrets
+                  type: string

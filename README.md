@@ -1,4 +1,4 @@
-# Scratch Crossplane configuration
+# Tanzu Application Platform Service Binding Crossplane configuration
 
 This repository defines a "scratch" (or empty) [Crossplane configuration](https://docs.crossplane.io/v1.11/concepts/packages/#configuration-packages). This configuration is a starting point for users in [Upbound](https://console.upbound.io).
 
