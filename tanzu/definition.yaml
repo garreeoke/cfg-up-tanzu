@@ -33,14 +33,26 @@ spec:
                 instanceClassDescription:
                   type: string
                   description: the description for the instance class
-                claimParams:
-                  description: Freeform field containing properties to pass to the class demo
-                  type: object
-                  x-kubernetes-preserve-unknown-fields: true
+                region:
+                  type: string
+                  description: region to use
+                  enum:
+                    - us-west-2
+                engineVersion:
+                  type: string
+                  description: engine version
+                  enum:
+                    - "3.9.13"
+                #claimParams:
+                #  description: Freeform field containing properties to pass to the class demo
+                #  type: object
+                #  x-kubernetes-preserve-unknown-fields: true
               required:
                 - id
                 - xrd
-                - claimParams
+                - region
+                - engineVersion
+                #- claimParams
             status:
               type: object
               description: Status

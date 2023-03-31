@@ -6,8 +6,6 @@ spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XSvcBinding
-  #publishConnectionDetailsWithStoreConfigRef:
-   # name: default
   resources:
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
@@ -26,8 +24,8 @@ spec:
       patches:
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
-        #- fromFieldPath: spec.instanceClassDescription
-        #  toFieldPath: spec.forProvider.manifest.spec.description
+        - fromFieldPath: spec.instanceClassDescription
+          toFieldPath: spec.forProvider.manifest.spec.description.short
         - fromFieldPath: spec.xrd
           toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
     - base:
@@ -41,8 +39,6 @@ spec:
               metadata:
                 labels:
                   apps.tanzu.vmware.com/aggregate-to-app-operator-cluster-access: "true"
-                  #services.tanzu.vmware.com/aggregate-to-provider-kubernetes: "true"
-                  #services.tanzu.vmware.com/aggregate-to-provider-aws: "true"
               rules:
                 - apiGroups:
                   - "services.apps.tanzu.vmware.com"
@@ -75,7 +71,13 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.classRef.name
-        - fromFieldPath: spec.claimParams
-          toFieldPath: spec.forProvider.manifest.spec.parameters
+        #- fromFieldPath: spec.claimParams
+        #  toFieldPath: spec.forProvider.manifest.spec.parameters
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.spec.paramters.id
+        - fromFieldPath: spec.region
+          toFieldPath: spec.forProvider.manifest.spec.paramters.region
+        - fromFieldPath: spec.engineVersion
+          toFieldPath: spec.forProvider.manifest.spec.paramters.engineVersion
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
