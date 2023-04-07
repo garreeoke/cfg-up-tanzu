@@ -78,10 +78,12 @@ spec:
               type: Opaque
               data:
                 rabbit: QnJva2VyRm9yVGFuenUx
-          providerConfigRef:
-            name: kubernetes-provider
+          #providerConfigRef:
+          #  name: kubernetes-provider
       name: secret-for-rabbit-tanzu
       patches:
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
           transforms:
@@ -146,10 +148,12 @@ spec:
                     volumes:
                     - projected:
                         defaultMode: 420
-          providerConfigRef:
-            name: kubernetes-provider
+          #providerConfigRef:
+          #  name: kubernetes-provider
       name: rabbit-publisher
       patches:
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: status.broker.address
           toFieldPath: spec.forProvider.manifest.metadata.labels[brokerAddress]
           transforms:

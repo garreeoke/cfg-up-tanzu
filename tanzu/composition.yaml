@@ -18,10 +18,12 @@ spec:
               spec:
                 description:
                   short: "Generic cluster instance class description"
-          providerConfigRef:
-            name: kubernetes-provider
+          #providerConfigRef:
+          #  name: kubernetes-provider
       name: cluster-instance-class
       patches:
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
@@ -47,10 +49,12 @@ spec:
                   verbs:
                   - claim
                   resourceNames: []
-          providerConfigRef:
-            name: kubernetes-provider
+          #providerConfigRef:
+          #  name: kubernetes-provider
       name: classInstanceRole
       patches:
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
@@ -63,10 +67,12 @@ spec:
             manifest:
               apiVersion: services.apps.tanzu.vmware.com/v1alpha1
               kind: ClassClaim
-          providerConfigRef:
-            name: kubernetes-provider
+          #providerConfigRef:
+          #  name: kubernetes-provider
       name: resource-demo
       patches:
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
@@ -79,5 +85,7 @@ spec:
           toFieldPath: spec.forProvider.manifest.spec.paramters.region
         - fromFieldPath: spec.engineVersion
           toFieldPath: spec.forProvider.manifest.spec.paramters.engineVersion
+        - fromFieldPath: spec.tapKubeconfig
+          toFieldPath: spec.forProvider.manifest.spec.paramters.tapKubeconfig
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
