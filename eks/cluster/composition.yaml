@@ -3,7 +3,7 @@ kind: Composition
 metadata:
   name: xclusters.aws.tap.upbound.io
 spec:
-  writeConnectionSecretsToNamespace: crossplane-system
+  writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
     apiVersion: aws.tap.upbound.io/v1alpha1
     kind: XCluster
