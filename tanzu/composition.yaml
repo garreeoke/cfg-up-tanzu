@@ -18,8 +18,9 @@ spec:
               spec:
                 description:
                   short: "Generic cluster instance class description"
-          #providerConfigRef:
-          #  name: kubernetes-provider
+                pool:
+                  kind: AwsBrokerMq
+                  group: tap.upbound.io #/v1alpha1
       name: cluster-instance-class
       patches:
         - fromFieldPath: spec.tapKubeconfigSecret
@@ -28,8 +29,10 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
           toFieldPath: spec.forProvider.manifest.spec.description.short
-        - fromFieldPath: spec.xrd
-          toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
+        #- fromFieldPath: spec.xrd
+        #  toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
+        #- fromFieldPath: spec.xrd
+        #  toFieldPath: spec.forProvider.manifest.spec.pool.kind
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
