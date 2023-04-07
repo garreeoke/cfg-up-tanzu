@@ -55,7 +55,7 @@ spec:
                 - xrd
                 - region
                 - engineVersion
-                - tapKubeconfig
+                - tapKubeconfigSecret
                 #- claimParams
             status:
               type: object
