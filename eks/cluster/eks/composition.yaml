@@ -225,7 +225,7 @@ spec:
           policy:
             fromFieldPath: Required
     - base:
-        apiVersion: aws.upbound.io/v1beta1
+        apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: ProviderConfig
         metadata:
           name: kubernetes-provider
