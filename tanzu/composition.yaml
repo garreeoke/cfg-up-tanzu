@@ -22,7 +22,7 @@ spec:
           #  name: kubernetes-provider
       name: cluster-instance-class
       patches:
-        - fromFieldPath: spec.tapKubeconfig
+        - fromFieldPath: spec.tapKubeconfigSecret
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -53,7 +53,7 @@ spec:
           #  name: kubernetes-provider
       name: classInstanceRole
       patches:
-        - fromFieldPath: spec.tapKubeconfig
+        - fromFieldPath: spec.tapKubeconfigSecret
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -71,7 +71,7 @@ spec:
           #  name: kubernetes-provider
       name: resource-demo
       patches:
-        - fromFieldPath: spec.tapKubeconfig
+        - fromFieldPath: spec.tapKubeconfigSecret
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -85,7 +85,7 @@ spec:
           toFieldPath: spec.forProvider.manifest.spec.paramters.region
         - fromFieldPath: spec.engineVersion
           toFieldPath: spec.forProvider.manifest.spec.paramters.engineVersion
-        - fromFieldPath: spec.tapKubeconfig
-          toFieldPath: spec.forProvider.manifest.spec.paramters.tapKubeconfig
+        - fromFieldPath: spec.tapKubeconfigSecret
+          toFieldPath: spec.forProvider.manifest.spec.paramters.tapKubeconfigSecret
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace

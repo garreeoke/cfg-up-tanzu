@@ -224,6 +224,19 @@ spec:
           toFieldPath: spec.forProvider.url
           policy:
             fromFieldPath: Required
+    #- base:
+    #    apiVersion: eks.aws.upbound.io/v1beta1
+    #    kind: IdentityProviderConfig
+    #    spec:
+    #      forProvider:
+    #        clusterNameSelector:
+    #          matchControllerRef: true
+    #          matchLabels:
+    #            testing.upbound.io/example-name: example
+    #        oidc:
+    #          - clientId: sts.amazonaws.com
+    #            #issuerUrl: https://issuer.url
+    #        region: us-west-1
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: ProviderConfig

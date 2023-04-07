@@ -43,9 +43,9 @@ spec:
                   description: engine version
                   enum:
                     - "3.9.13"
-                tapKubeconfig:
+                tapKubeconfigSecret:
                   type: string
-                  description: tap kubeconfig to use
+                  description: tap kubeconfig secret to use
                 #claimParams:
                 #  description: Freeform field containing properties to pass to the class demo
                 #  type: object

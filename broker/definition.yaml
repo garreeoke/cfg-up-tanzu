@@ -40,9 +40,9 @@ spec:
                 engineVersion:
                   type: string
                   description: broker version
-                tapKubeconfig:
+                tapKubeconfigSecret:
                   type: string
-                  description: tap kubeconfig to use
+                  description: tap kubeconfig secret to use
               required:
                 - id
                 - region
