@@ -72,12 +72,12 @@ spec:
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.classRef.name
         - fromFieldPath: spec.id
-          toFieldPath: spec.forProvider.manifest.spec.paramters.id
+          toFieldPath: spec.forProvider.manifest.spec.parameters.id
         - fromFieldPath: spec.region
-          toFieldPath: spec.forProvider.manifest.spec.paramters.region
+          toFieldPath: spec.forProvider.manifest.spec.parameters.region
         - fromFieldPath: spec.engineVersion
-          toFieldPath: spec.forProvider.manifest.spec.paramters.engineVersion
+          toFieldPath: spec.forProvider.manifest.spec.parameters.engineVersion
         - fromFieldPath: spec.tapKubeconfigSecret
-          toFieldPath: spec.forProvider.manifest.spec.paramters.tapKubeconfigSecret
+          toFieldPath: spec.forProvider.manifest.spec.parameters.tapKubeconfigSecret
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
