@@ -18,9 +18,6 @@ spec:
               spec:
                 description:
                   short: "Generic cluster instance class description"
-                pool:
-                  kind: AwsBrokerMq
-                  group: tap.upbound.io #/v1alpha1
       name: cluster-instance-class
       patches:
         - fromFieldPath: spec.tapKubeconfigSecret
@@ -29,10 +26,8 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
           toFieldPath: spec.forProvider.manifest.spec.description.short
-        #- fromFieldPath: spec.xrd
-        #  toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
-        #- fromFieldPath: spec.xrd
-        #  toFieldPath: spec.forProvider.manifest.spec.pool.kind
+        - fromFieldPath: spec.xrd
+          toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -52,8 +47,6 @@ spec:
                   verbs:
                   - claim
                   resourceNames: []
-          #providerConfigRef:
-          #  name: kubernetes-provider
       name: classInstanceRole
       patches:
         - fromFieldPath: spec.tapKubeconfigSecret
@@ -70,8 +63,6 @@ spec:
             manifest:
               apiVersion: services.apps.tanzu.vmware.com/v1alpha1
               kind: ClassClaim
-          #providerConfigRef:
-          #  name: kubernetes-provider
       name: resource-demo
       patches:
         - fromFieldPath: spec.tapKubeconfigSecret
@@ -80,8 +71,6 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.classRef.name
-        #- fromFieldPath: spec.claimParams
-        #  toFieldPath: spec.forProvider.manifest.spec.parameters
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.paramters.id
         - fromFieldPath: spec.region
