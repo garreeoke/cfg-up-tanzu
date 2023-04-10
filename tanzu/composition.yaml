@@ -91,10 +91,10 @@ spec:
                 ref:
                   apiVersion: v1
                   kind: Secret
-          providerConfigRef:
-            name: kubernetes-provider
       name: resource-claim
       patches:
+        - fromFieldPath: spec.tapK8ProviderCfg
+          toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
