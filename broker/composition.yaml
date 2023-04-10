@@ -21,6 +21,7 @@ spec:
             user:
               - passwordSecretRef:
                   key: rabbit
+                  namespace: upbound-system
                 username: rabbit1
       name: aws-broker-mq
       patches:
@@ -36,8 +37,8 @@ spec:
           toFieldPath: spec.forProvider.engineVersion
           policy:
             fromFieldPath: Required
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
+        #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+        #  toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.name
           transforms:
