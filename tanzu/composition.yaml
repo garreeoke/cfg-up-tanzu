@@ -7,6 +7,23 @@ spec:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XSvcBinding
   resources:
+    # Calling broker here until provisioner works with upbound cloud
+    - base:
+        apiVersion: tap.upbound.io/v1alpha1
+        kind: AwsBrokerMq
+        spec:
+      name: broker
+      patches:
+        - fromFieldPath: spec.id
+          toFieldPath: spec.id
+        - fromFieldPath: spec.part-of
+          toFieldPath: spec.part-of
+        - fromFieldPath: spec.region
+          toFieldPath: spec.region
+        - fromFieldPath: spec.engineVersion
+          toFieldPath: spec.engineVersion
+        - fromFieldPath: spec.tapKubeconfigSecret
+          toFieldPath: spec.tapKubeconfigSecret
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -18,6 +35,10 @@ spec:
               spec:
                 description:
                   short: "Generic cluster instance class description"
+                # Added below to work around until provisioner supports class claims with non-CRDs
+                pool:
+                  kind: Secret
+                  fieldSelector: type=connection.crossplane.io/v1alpha1
       name: cluster-instance-class
       patches:
         - fromFieldPath: spec.tapKubeconfigSecret
@@ -26,8 +47,11 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
           toFieldPath: spec.forProvider.manifest.spec.description.short
-        - fromFieldPath: spec.xrd
-          toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.spec.pool.labelSelector.matchLabels["services.apps.tanzu.vmware.com/class"]
+        # Commented out below would be used when provisoner works.
+        #- fromFieldPath: spec.xrd
+        #  toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -62,22 +86,49 @@ spec:
           forProvider:
             manifest:
               apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-              kind: ClassClaim
-      name: resource-demo
+              kind: ResourceClaim
+              spec:
+                ref:
+                  apiVersion: v1
+                  kind: Secret
+          providerConfigRef:
+            name: kubernetes-provider
+      name: resource-claim
       patches:
-        - fromFieldPath: spec.tapKubeconfigSecret
-          toFieldPath: spec.providerConfigRef.name
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
-          toFieldPath: spec.forProvider.manifest.spec.classRef.name
-        - fromFieldPath: spec.id
-          toFieldPath: spec.forProvider.manifest.spec.parameters.id
-        - fromFieldPath: spec.region
-          toFieldPath: spec.forProvider.manifest.spec.parameters.region
-        - fromFieldPath: spec.engineVersion
-          toFieldPath: spec.forProvider.manifest.spec.parameters.engineVersion
-        - fromFieldPath: spec.tapKubeconfigSecret
-          toFieldPath: spec.forProvider.manifest.spec.parameters.tapKubeconfigSecret
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.forProvider.manifest.metadata.namespace
+          toFieldPath: spec.forProvider.manifest.spec.ref.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-connection"
+    # Will use classclaim when provisioner supports upbound cloud
+    #- base:
+    #    apiVersion: kubernetes.crossplane.io/v1alpha1
+    #    kind: Object
+    #    spec:
+    #      forProvider:
+    #        manifest:
+    #          apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    #          kind: ClassClaim
+    #  name: resource-demo
+    #  patches:
+    #    - fromFieldPath: spec.tapKubeconfigSecret
+    #      toFieldPath: spec.providerConfigRef.name
+    #    - fromFieldPath: spec.id
+    #      toFieldPath: spec.forProvider.manifest.metadata.name
+    #    - fromFieldPath: spec.id
+    #      toFieldPath: spec.forProvider.manifest.spec.classRef.name
+    #    - fromFieldPath: spec.id
+    #      toFieldPath: spec.forProvider.manifest.spec.parameters.id
+    #    - fromFieldPath: spec.region
+    #      toFieldPath: spec.forProvider.manifest.spec.parameters.region
+    #    - fromFieldPath: spec.engineVersion
+    #      toFieldPath: spec.forProvider.manifest.spec.parameters.engineVersion
+    #    - fromFieldPath: spec.tapKubeconfigSecret
+    #      toFieldPath: spec.forProvider.manifest.spec.parameters.tapKubeconfigSecret
+    #    - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+    #      toFieldPath: spec.forProvider.manifest.metadata.namespace

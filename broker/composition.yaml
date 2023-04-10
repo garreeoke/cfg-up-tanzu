@@ -36,8 +36,7 @@ spec:
           toFieldPath: spec.forProvider.engineVersion
           policy:
             fromFieldPath: Required
-        #- fromFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: spec.metadata.namespace
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.name
@@ -97,8 +96,7 @@ spec:
             - type: string
               string:
                 fmt: "%s-creds"        
-        #- fromFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: spec.metadata.namespace
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
           toFieldPath: spec.forProvider.manifest.metadata.namespace
     # This just gives it data
     - base:
@@ -195,8 +193,7 @@ spec:
                 fmt: "%s-publisher"
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.labels["app.kubernetes.io/part-of"]
-        #- fromFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: spec.metadata.namespace
+        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
           toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.metadata.labels["app.kubernetes.io/name"]
