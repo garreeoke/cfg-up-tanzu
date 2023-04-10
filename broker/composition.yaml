@@ -74,6 +74,8 @@ spec:
           forProvider:
             manifest:
               apiVersion: v1
+              metadata:
+                namespace: upbound-system
               kind: Secret
               type: Opaque
               data:
@@ -96,8 +98,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-creds"        
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.forProvider.manifest.metadata.namespace
+        #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+        #  toFieldPath: spec.forProvider.manifest.metadata.namespace
     # This just gives it data
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
