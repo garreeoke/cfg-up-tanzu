@@ -10,7 +10,7 @@ spec:
     # Calling broker here until provisioner works with upbound cloud
     - base:
         apiVersion: tap.upbound.io/v1alpha1
-        kind: AwsBrokerMq
+        kind: XAwsBrokerMq
       name: broker
       patches:
         - fromFieldPath: spec.id
