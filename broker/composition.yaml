@@ -78,12 +78,12 @@ spec:
               type: Opaque
               data:
                 rabbit: QnJva2VyRm9yVGFuenUx
-          #providerConfigRef:
-          #  name: kubernetes-provider
+          providerConfigRef:
+            name: kubernetes-provider
       name: secret-for-rabbit-tanzu
       patches:
-        - fromFieldPath: spec.tapK8ProviderCfg
-          toFieldPath: spec.providerConfigRef.name
+        #- fromFieldPath: spec.tapK8ProviderCfg
+        #  toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
           transforms:
