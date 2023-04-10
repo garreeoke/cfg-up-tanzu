@@ -21,7 +21,7 @@ spec:
             user:
               - passwordSecretRef:
                   key: rabbit
-                  namespace: upbound-system
+                  #namespace: upbound-system
                 username: rabbit1
       name: aws-broker-mq
       patches:
@@ -37,8 +37,8 @@ spec:
           toFieldPath: spec.forProvider.engineVersion
           policy:
             fromFieldPath: Required
-        #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-        #  toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.name
           transforms:
@@ -48,11 +48,14 @@ spec:
         - type: ToCompositeFieldPath
           fromFieldPath: status.atProvider.instances[0].endpoints[0]
           toFieldPath: status.broker.address
-        #  toFieldPath: spec.writeConnectionSecretToRef.name
-        #  transforms:
-         #   - type: string
-         #     string:
-         #       fmt: "%s-connection"
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
+        - fromFieldPath: spec.id
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-connection"
       connectionDetails:
         - type: FromValue
           name: type
@@ -75,8 +78,8 @@ spec:
           forProvider:
             manifest:
               apiVersion: v1
-              metadata:
-                namespace: upbound-system
+              #metadata:
+              #  namespace: upbound-system
               kind: Secret
               type: Opaque
               data:
@@ -99,8 +102,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-creds"        
-        #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-        #  toFieldPath: spec.forProvider.manifest.metadata.namespace
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.manifest.metadata.namespace
     # This just gives it data
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
