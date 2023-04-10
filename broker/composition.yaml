@@ -36,7 +36,7 @@ spec:
           toFieldPath: spec.forProvider.engineVersion
           policy:
             fromFieldPath: Required
-        - fromFieldPath: spec.writeConnectionSecretToRef.namespace
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.user[0].passwordSecretRef.name
