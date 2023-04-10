@@ -23,6 +23,8 @@ spec:
           toFieldPath: spec.engineVersion
         - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.tapK8ProviderCfg
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: metadata.namespace
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -46,8 +48,6 @@ spec:
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
           toFieldPath: spec.forProvider.manifest.spec.description.short
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.pool.labelSelector.matchLabels["services.apps.tanzu.vmware.com/class"]
         # Commented out below would be used when provisoner works.
