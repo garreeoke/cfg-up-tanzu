@@ -82,7 +82,7 @@ spec:
           #  name: kubernetes-provider
       name: secret-for-rabbit-tanzu
       patches:
-        - fromFieldPath: spec.tapKubeconfigSecret
+        - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
@@ -152,7 +152,7 @@ spec:
           #  name: kubernetes-provider
       name: rabbit-publisher
       patches:
-        - fromFieldPath: spec.tapKubeconfigSecret
+        - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: status.broker.address
           toFieldPath: spec.forProvider.manifest.metadata.labels[brokerAddress]

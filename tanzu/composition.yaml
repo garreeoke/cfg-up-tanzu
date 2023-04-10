@@ -22,8 +22,8 @@ spec:
           toFieldPath: spec.region
         - fromFieldPath: spec.engineVersion
           toFieldPath: spec.engineVersion
-        - fromFieldPath: spec.tapKubeconfigSecret
-          toFieldPath: spec.tapKubeconfigSecret
+        - fromFieldPath: spec.tapK8ProviderCfg
+          toFieldPath: spec.tapK8ProviderCfg
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -41,7 +41,7 @@ spec:
                   fieldSelector: type=connection.crossplane.io/v1alpha1
       name: cluster-instance-class
       patches:
-        - fromFieldPath: spec.tapKubeconfigSecret
+        - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -73,7 +73,7 @@ spec:
                   resourceNames: []
       name: classInstanceRole
       patches:
-        - fromFieldPath: spec.tapKubeconfigSecret
+        - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
@@ -116,7 +116,7 @@ spec:
     #          kind: ClassClaim
     #  name: resource-demo
     #  patches:
-    #    - fromFieldPath: spec.tapKubeconfigSecret
+    #    - fromFieldPath: spec.tapK8ProviderCfg
     #      toFieldPath: spec.providerConfigRef.name
     #    - fromFieldPath: spec.id
     #      toFieldPath: spec.forProvider.manifest.metadata.name
@@ -128,7 +128,7 @@ spec:
     #      toFieldPath: spec.forProvider.manifest.spec.parameters.region
     #    - fromFieldPath: spec.engineVersion
     #      toFieldPath: spec.forProvider.manifest.spec.parameters.engineVersion
-    #    - fromFieldPath: spec.tapKubeconfigSecret
-    #      toFieldPath: spec.forProvider.manifest.spec.parameters.tapKubeconfigSecret
+    #    - fromFieldPath: spec.tapK8ProviderCfg
+    #      toFieldPath: spec.forProvider.manifest.spec.parameters.tapK8ProviderCfg
     #    - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
     #      toFieldPath: spec.forProvider.manifest.metadata.namespace

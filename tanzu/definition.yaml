@@ -43,7 +43,7 @@ spec:
                   description: engine version
                   enum:
                     - "3.9.13"
-                tapKubeconfigSecret:
+                tapK8ProviderCfg:
                   type: string
                   description: tap kubeconfig secret to use
                 #claimParams:
@@ -55,7 +55,7 @@ spec:
                 #- xrd
                 - region
                 - engineVersion
-                - tapKubeconfigSecret
+                - tapK8ProviderCfg
                 #- claimParams
             status:
               type: object
