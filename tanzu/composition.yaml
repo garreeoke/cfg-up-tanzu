@@ -15,6 +15,8 @@ spec:
       patches:
         - fromFieldPath: spec.id
           toFieldPath: spec.id
+        - fromFieldPath: spec.id
+          toFieldPath: metadata.name
         - fromFieldPath: spec.part-of
           toFieldPath: spec.part-of
         - fromFieldPath: spec.region
