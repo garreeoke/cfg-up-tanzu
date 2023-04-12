@@ -25,6 +25,30 @@ spec:
           toFieldPath: spec.tapK8ProviderCfg
         - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: metadata.namespace
+        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
+        - fromFieldPath: spec.id
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-connection"
+      connectionDetails:
+        - type: FromConnectionSecretKey
+          name: rabbitmq
+          fromConnectionSecretKey: rabbitmq
+        - type: FromConnectionSecretKey
+          name: addresses
+          fromConnectionSecretKey: addresses
+        - type: FromConnectionSecretKey
+          name: virtual-host
+          fromConnectionSecretKey: virtual-host
+        - type: FromConnectionSecretKey
+          name: username
+          fromConnectionSecretKey: username
+        - type: FromConnectionSecretKey
+          name: password
+          fromConnectionSecretKey: password
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
