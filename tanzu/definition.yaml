@@ -12,6 +12,12 @@ spec:
   claimNames:
     kind: SvcBinding
     plural: svcbindings
+  connectionSecretKeys:
+    - type
+    - addresses
+    - virtual-host
+    - username
+    - password
   versions:
     - name: v1alpha1
       served: true
