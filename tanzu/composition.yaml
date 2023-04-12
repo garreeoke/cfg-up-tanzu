@@ -69,6 +69,12 @@ spec:
         - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-clusterInstanceClass"
+        - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
           toFieldPath: spec.forProvider.manifest.spec.description.short
@@ -103,6 +109,12 @@ spec:
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.id
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-clusterrole"
+        - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.rules[0].resourceNames[0]
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
@@ -120,6 +132,12 @@ spec:
       patches:
         - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
+        - fromFieldPath: spec.id
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-resourceClaim"
         - fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
