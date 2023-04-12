@@ -73,7 +73,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-clusterInstanceClass"
+                fmt: "%s-clusterinstanceclass"
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.metadata.name
         - fromFieldPath: spec.instanceClassDescription
@@ -137,7 +137,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-resourceClaim"
+                fmt: "%s-resourceclaim"
         - fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.id
