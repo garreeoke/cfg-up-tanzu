@@ -55,7 +55,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-connection"
+                fmt: "%s-conn"
       connectionDetails:
         - type: FromValue
           name: type
