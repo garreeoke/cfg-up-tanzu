@@ -6,7 +6,7 @@ spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XSvcBinding
-  writeConnectionSecretsToNamespace: upbound-system
+  #writeConnectionSecretsToNamespace: upbound-system
   resources:
     # Calling broker here until provisioner works with upbound cloud
     - base:
