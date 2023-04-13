@@ -218,10 +218,10 @@ spec:
                 fmt: "bindings-%s"
         - fromFieldPath: spec.writeConnectionSecretToRef.name
           toFieldPath: spec.forProvider.manifest.spec.template.spec.volumes[0].projected.sources[0].secret.name
-          #transforms:
-          #  - type: string
-          #    string:
-          #      fmt: "%s-connection"
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-connection"
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.containers[0].volumeMounts[0].mountPath
           transforms:
