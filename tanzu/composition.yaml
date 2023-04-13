@@ -28,6 +28,8 @@ spec:
           toFieldPath: spec.tapK8ProviderCfg
         - fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
           toFieldPath: metadata.namespace
+          policy:
+            fromFieldPath: Required
         #- fromFieldPath: spec.claimRef.namespace
         #  toFieldPath: spec.writeConnectionSecretToRef.namespace
         #- fromFieldPath: spec.id
