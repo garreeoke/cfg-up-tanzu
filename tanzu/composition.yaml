@@ -6,7 +6,7 @@ spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XSvcBinding
-  #writeConnectionSecretsToNamespace: upbound-system
+  writeConnectionSecretsToNamespace: upbound-system
   resources:
     # Calling broker here until provisioner works with upbound cloud
     - base:
@@ -36,22 +36,12 @@ spec:
         #    - type: string
         #      string:
         #        fmt: "%s-connection"
-      #connectionDetails:
-      #  - type: FromConnectionSecretKey
-      #    name: rabbitmq
-      #    fromConnectionSecretKey: rabbitmq
-      #  - type: FromConnectionSecretKey
-      #    name: addresses
-      #    fromConnectionSecretKey: addresses
-      #  - type: FromConnectionSecretKey
-      #    name: virtual-host
-      #    fromConnectionSecretKey: virtual-host
-      #  - type: FromConnectionSecretKey
-      #    name: username
-      #    fromConnectionSecretKey: username
-      #  - type: FromConnectionSecretKey
-      #    name: password
-      #    fromConnectionSecretKey: password
+      connectionDetails:
+        - fromConnectionSecretKey: type
+        - fromConnectionSecretKey: addresses
+        - fromConnectionSecretKey: virtual-host
+        - fromConnectionSecretKey: username
+        - fromConnectionSecretKey: password
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object

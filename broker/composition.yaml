@@ -6,6 +6,7 @@ spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XAwsBrokerMq
+  writeConnectionSecretsToNamespace: upbound-system
   resources:
     - base:
         apiVersion: mq.aws.upbound.io/v1beta1
