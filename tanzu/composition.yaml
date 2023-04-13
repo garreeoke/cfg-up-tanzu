@@ -11,7 +11,7 @@ spec:
     # Calling broker here until provisioner works with upbound cloud
     - base:
         apiVersion: tap.upbound.io/v1alpha1
-        kind: AwsBrokerMq
+        kind: XAwsBrokerMq
       name: broker
       patches:
         - fromFieldPath: spec.id
@@ -26,8 +26,8 @@ spec:
           toFieldPath: spec.engineVersion
         - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.tapK8ProviderCfg
-        - fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: metadata.namespace
+        #- fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
+        #  toFieldPath: metadata.namespace
         #- fromFieldPath: spec.claimRef.namespace
         #  toFieldPath: spec.writeConnectionSecretToRef.namespace
         #- fromFieldPath: spec.id
