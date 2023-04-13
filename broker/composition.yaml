@@ -6,7 +6,7 @@ spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
     kind: XAwsBrokerMq
-  writeConnectionSecretsToNamespace: upbound-system
+  writeConnectionSecretsToNamespace: tap-workloads
   resources:
     - base:
         apiVersion: mq.aws.upbound.io/v1beta1
@@ -51,12 +51,12 @@ spec:
           toFieldPath: status.broker.address
         #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
         #  toFieldPath: spec.writeConnectionSecretToRef.namespace
-        #- fromFieldPath: spec.id
-        #  toFieldPath: spec.writeConnectionSecretToRef.name
-        #  transforms:
-        #    - type: string
-        #      string:
-        #        fmt: "%s-conn"
+        - fromFieldPath: spec.id
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-broker"
       connectionDetails:
         - type: FromValue
           name: type
