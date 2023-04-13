@@ -48,14 +48,14 @@ spec:
         - type: ToCompositeFieldPath
           fromFieldPath: status.atProvider.instances[0].endpoints[0]
           toFieldPath: status.broker.address
-        - fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
-          toFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: spec.id
-          toFieldPath: spec.writeConnectionSecretToRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-conn"
+        #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
+        #  toFieldPath: spec.writeConnectionSecretToRef.namespace
+        #- fromFieldPath: spec.id
+        #  toFieldPath: spec.writeConnectionSecretToRef.name
+        #  transforms:
+        #    - type: string
+        #      string:
+        #        fmt: "%s-conn"
       connectionDetails:
         - type: FromValue
           name: type
