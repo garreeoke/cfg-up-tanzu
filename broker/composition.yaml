@@ -51,12 +51,12 @@ spec:
           toFieldPath: status.broker.address
         #- fromFieldPath: metadata.labels[crossplane.io/claim-namespace]
         #  toFieldPath: spec.writeConnectionSecretToRef.namespace
-        - fromFieldPath: spec.id
-          toFieldPath: spec.writeConnectionSecretToRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-broker"
+        #- fromFieldPath: spec.id
+        #  toFieldPath: spec.writeConnectionSecretToRef.name
+        #  transforms:
+        #    - type: string
+        #      string:
+        #        fmt: "%s-broker"
       connectionDetails:
         - type: FromValue
           name: type
