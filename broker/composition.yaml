@@ -216,7 +216,7 @@ spec:
             - type: string
               string:
                 fmt: "bindings-%s"
-        - fromFieldPath: spec.writeConnectionSecretToRef.name
+        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.writeConnectionSecretToRef.name
           toFieldPath: spec.forProvider.manifest.spec.template.spec.volumes[0].projected.sources[0].secret.name
           transforms:
             - type: string
