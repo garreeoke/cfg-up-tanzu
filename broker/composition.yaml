@@ -210,7 +210,7 @@ spec:
                 fmt: "%s-publisher"
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.metadata.labels["app.kubernetes.io/part-of"]
-        - fromFieldPath: spec.id
+        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.volumes[0].name
           transforms:
             - type: string
@@ -222,13 +222,13 @@ spec:
             - type: string
               string:
                 fmt: "%s-connection"
-        - fromFieldPath: spec.id
+        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.containers[0].volumeMounts[0].mountPath
           transforms:
             - type: string
               string:
                 fmt: "/bindings/%s"
-        - fromFieldPath: spec.id
+        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.containers[0].volumeMounts[0].name
           transforms:
             - type: string
