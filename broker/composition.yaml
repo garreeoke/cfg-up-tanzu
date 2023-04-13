@@ -210,25 +210,25 @@ spec:
                 fmt: "%s-publisher"
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.metadata.labels["app.kubernetes.io/part-of"]
-        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
+        - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.volumes[0].name
           transforms:
             - type: string
               string:
                 fmt: "bindings-%s"
-        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.writeConnectionSecretToRef.name
+        - fromFieldPath: spec.writeConnectionSecretToRef.name
           toFieldPath: spec.forProvider.manifest.spec.template.spec.volumes[0].projected.sources[0].secret.name
           transforms:
             - type: string
               string:
                 fmt: "%s-connection"
-        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
+        - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.containers[0].volumeMounts[0].mountPath
           transforms:
             - type: string
               string:
                 fmt: "/bindings/%s"
-        - fromFieldPath: metadata.labels["app.kubernetes.io/part-of"] #spec.id
+        - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.template.spec.containers[0].volumeMounts[0].name
           transforms:
             - type: string
