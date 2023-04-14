@@ -24,6 +24,8 @@ spec:
                   key: rabbit
                   namespace: upbound-system
                 username: rabbit1
+            tags:
+              usage: demo
       name: aws-broker-mq
       patches:
         - fromFieldPath: spec.id
