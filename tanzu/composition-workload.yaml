@@ -10,7 +10,7 @@ spec:
     kind: XSvcBinding
   writeConnectionSecretsToNamespace: tap-workloads
   resources:
-    # Create the workload, but wait for somethings ?
+    # Create the workload, but wait for something
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
           kind: Object
