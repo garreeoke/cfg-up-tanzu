@@ -13,26 +13,26 @@ spec:
     # Create the workload, but wait for something
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
-          kind: Object
-          spec:
-            forProvider:
-              manifest:
-                apiVersion: carto.run/v1alpha1
-                kind: Workload
-                metadata:
-                  labels:
-                    apps.tanzu.vmware.com/workload-type: web
-                spec:
-                  source:
-                    git:
-                      url: ssh://github.com/garreeoke/spring-sensors-rabbit.git
-                      ref:
-                        branch: main
-                  serviceClaims:
-                    - name: broker
-                      ref:
-                        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-                        kind: ResourceClaim
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: carto.run/v1alpha1
+              kind: Workload
+              metadata:
+                labels:
+                  apps.tanzu.vmware.com/workload-type: web
+              spec:
+                source:
+                  git:
+                    url: ssh://github.com/garreeoke/spring-sensors-rabbit.git
+                    ref:
+                      branch: main
+                serviceClaims:
+                  - name: broker
+                    ref:
+                      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+                      kind: ResourceClaim
         name: tapWorkload
         patches:
           - fromFieldPath: spec.tapK8ProviderCfg
