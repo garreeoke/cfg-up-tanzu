@@ -3,7 +3,7 @@ kind: Composition
 metadata:
   name: xsvcbindings-workload.tap.upbound.io
   labels:
-    tap.upbound.io/tanzu-type: workload
+    tanzu-type: workload
 spec:
   compositeTypeRef:
     apiVersion: tap.upbound.io/v1alpha1
