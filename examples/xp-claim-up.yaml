@@ -10,4 +10,6 @@ spec:
   tapK8ProviderCfg: torg-tap-ff7q6-f6jxt #Provider config on upbound cloud to talk back to TAP K8 cluster
   writeConnectionSecretToRef:
     name: spring-sensors-connection
-    #namespace: tap-workloads
+  compositionSelector:
+    matchLabels:
+      tap.upbound.io/tanzu-type: workload
