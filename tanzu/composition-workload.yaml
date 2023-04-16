@@ -105,6 +105,7 @@ spec:
         - fromFieldPath: spec.id
           toFieldPath: spec.forProvider.manifest.spec.pool.labelSelector.matchLabels["services.apps.tanzu.vmware.com/class"]
         # Commented out below would be used when provisoner works.
+        # blah
         #- fromFieldPath: spec.xrd
         #  toFieldPath: spec.forProvider.manifest.spec.provisioner.crossplane.compositeResourceDefinition
     - base:
