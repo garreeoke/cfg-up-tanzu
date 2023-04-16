@@ -33,22 +33,22 @@ spec:
                     ref:
                       apiVersion: services.apps.tanzu.vmware.com/v1alpha1
                       kind: ResourceClaim
-        name: tapWorkload
-        patches:
-          - fromFieldPath: spec.tapK8ProviderCfg
-            toFieldPath: spec.providerConfigRef.name
-          - fromFieldPath: spec.id
-            toFieldPath: metadata.name
-            transforms:
-              - type: string
-                string:
-                  fmt: "%s-tap-workload"
-          - fromFieldPath: spec.id
-            toFieldPath: spec.forProvider.manifest.metadata.name
-          - fromFieldPath: spec.id
-            toFieldPath: spec.forProvider.manifest.metadata.labels[app.kubernetes.io/part-of]
-          - fromFieldPath: spec.id
-            toFieldPath: spec.forProvider.manifest.spec.serviceClaims[0].ref.name
+      name: tapWorkload
+      patches:
+        - fromFieldPath: spec.tapK8ProviderCfg
+          toFieldPath: spec.providerConfigRef.name
+        - fromFieldPath: spec.id
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-tap-workload"
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.metadata.name
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.metadata.labels[app.kubernetes.io/part-of]
+        - fromFieldPath: spec.id
+          toFieldPath: spec.forProvider.manifest.spec.serviceClaims[0].ref.name
     # Calling broker here until provisioner works with upbound cloud
     - base:
         apiVersion: tap.upbound.io/v1alpha1
