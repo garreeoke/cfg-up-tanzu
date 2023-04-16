@@ -35,6 +35,8 @@ spec:
                       kind: ResourceClaim
       name: tapWorkload
       patches:
+        - fromFieldPath: spec.claimRef.namespace #metadata.labels[crossplane.io/claim-namespace]
+          toFieldPath: spec.forProvider.manifest.metadata.namespace
         - fromFieldPath: spec.tapK8ProviderCfg
           toFieldPath: spec.providerConfigRef.name
         - fromFieldPath: spec.id
