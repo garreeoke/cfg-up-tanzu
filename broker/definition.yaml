@@ -40,6 +40,9 @@ spec:
                 engineVersion:
                   type: string
                   description: broker version
+                  enum:
+                    - "3.9.13"
+                    - "3.10.20"
                 tapK8ProviderCfg:
                   type: string
                   description: tap kubeconfig secret to use
